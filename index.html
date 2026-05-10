@@ -9,17 +9,23 @@
         font-size: 40px; /* Taille du texte */
         padding: 20px;
         line-height: 1.4;
+        white-space: pre-wrap; /* Respecte les retours à la ligne */
     }
 </style>
 </head>
 <body>
-<pre id="msg">Chargement...</pre>
+
+<div id="msg">Chargement...</div>
 
 <script>
 fetch("https://raw.githubusercontent.com/fdu-edo/QRCodeMSG/main/message.txt")
-    .then(r => r.text())
-    .then(t => document.getElementById("msg").textContent = t)
-    .catch(() => document.getElementById("msg").textContent = "Erreur de chargement");
+    .then(response => response.text())
+    .then(text => {
+        document.getElementById("msg").textContent = text;
+    })
+    .catch(err => {
+        document.getElementById("msg").textContent = "Erreur de chargement du message.";
+    });
 </script>
 
 </body>
