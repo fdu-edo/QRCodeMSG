@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Message</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        font-size: 40px; /* Taille du texte */
+        padding: 20px;
+        line-height: 1.4;
+    }
+</style>
+</head>
+<body>
+<pre id="msg">Chargement...</pre>
+
+<script>
+fetch("https://raw.githubusercontent.com/fdu-edo/QRCodeMSG/main/message.txt")
+    .then(r => r.text())
+    .then(t => document.getElementById("msg").textContent = t)
+    .catch(() => document.getElementById("msg").textContent = "Erreur de chargement");
+</script>
+
+</body>
+</html>
