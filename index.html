@@ -6,10 +6,10 @@
 <style>
     body {
         font-family: Arial, sans-serif;
-        font-size: 40px;
+        font-size: 40px; /* Taille du texte */
         padding: 20px;
         line-height: 1.4;
-        white-space: pre-wrap;
+        white-space: pre-wrap; /* Respecte les retours à la ligne */
     }
 </style>
 </head>
@@ -18,14 +18,20 @@
 <div id="msg">Chargement...</div>
 
 <script>
-fetch("https://raw.githubusercontent.com/fdu-edo/QRCodeMSG/main/message.txt")
-    .then(response => response.text())
-    .then(text => {
-        document.getElementById("msg").textContent = text;
-    })
-    .catch(err => {
-        document.getElementById("msg").textContent = "Erreur de chargement du message.";
-    });
+function loadMessage() {
+    const url = "https://raw.githubusercontent.com/fdu-edo/QRCodeMSG/main/message.txt?t=" + Date.now();
+
+    fetch(url, { cache: "no-store" })
+        .then(response => response.text())
+        .then(text => {
+            document.getElementById("msg").textContent = text;
+        })
+        .catch(err => {
+            document.getElementById("msg").textContent = "Erreur de chargement du message.";
+        });
+}
+
+loadMessage();
 </script>
 
 </body>
