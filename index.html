@@ -1,93 +1,32 @@
 <!DOCTYPE html>
-
 <html lang="fr">
-
 <head>
-
-    <meta charset="UTF-8">
-
-    <title>Text Viewer</title>
-
- 
-
-    <style>
-
-        body {
-
-            margin: 40px;
-
-            background-color: #f5f5f5;
-
-        }
-
- 
-
-        #text-container {
-
-            white-space: pre-wrap;      /* conserve les retours à la ligne */
-
-            font-family: "Georgia", serif;
-
-            font-size: 18px;
-
-            line-height: 1.6;
-
-            color: #222;
-
-            max-width: 900px;
-
-        }
-
-    </style>
-
+<meta charset="UTF-8">
+<title>Message</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        font-size: 40px;
+        padding: 20px;
+        line-height: 1.4;
+        white-space: pre-wrap;
+    }
+</style>
 </head>
-
 <body>
 
- 
+<div id="msg">Chargement...</div>
 
-    <div id="text-container">Chargement du texte…</div>
-
- 
-
-    <script>
-
-        fetch('message.txt')
-
-            .then(response => {
-
-                if (!response.ok) {
-
-                    throw new Error("Erreur de chargement du fichier texte");
-
-                }
-
-                return response.text();
-
-            })
-
-            .then(text => {
-
-                document.getElementById('text-container').textContent = text;
-
-            })
-
-            .catch(error => {
-
-                document.getElementById('text-container').textContent =
-
-                    "Impossible de charger le fichier texte.";
-
-                console.error(error);
-
-            });
-
-    </script>
-
- 
+<script>
+fetch("https://raw.githubusercontent.com/fdu-edo/QRCodeMSG/main/message.txt")
+    .then(response => response.text())
+    .then(text => {
+        document.getElementById("msg").textContent = text;
+    })
+    .catch(err => {
+        document.getElementById("msg").textContent = "Erreur de chargement du message.";
+    });
+</script>
 
 </body>
-
 </html>
-
- 
